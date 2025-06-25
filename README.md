@@ -5,7 +5,7 @@
 
 This platform enables users to share their **thoughts and music** in an authentic and distraction-free space.
 
-> Built as part of an academic DBMS project module.
+> Built as part of an academic DBMS project module
 
 ### 🎯 Project Goals
 
