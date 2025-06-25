@@ -1,0 +1,104 @@
+-- USERS (10)
+INSERT INTO App_User VALUES ('u001', 'alice', 'USA', 'Music lover and traveler.', TRUE, 'alice@example.com', '5551234567', 'alicepass', '2022-01-10');
+INSERT INTO App_User VALUES ('u002', 'bob', 'UK', 'Aspiring guitarist.', TRUE, 'bob@example.com', '5552345678', 'bobpass', '2022-02-15');
+INSERT INTO App_User VALUES ('u003', 'carol', 'India', 'Bollywood fan!', FALSE, 'carol@example.com', '5553456789', 'carolpass', '2022-03-20');
+INSERT INTO App_User VALUES ('u004', 'daniel', 'Germany', 'Classical music enthusiast.', TRUE, 'daniel@example.com', '5554567890', 'danielpass', '2022-04-12');
+INSERT INTO App_User VALUES ('u005', 'emma', 'France', 'Pop culture addict.', TRUE, 'emma@example.com', '5555678901', 'emmapass', '2022-05-05');
+INSERT INTO App_User VALUES ('u006', 'frank', 'USA', 'Hip-hop and rap fan.', FALSE, 'frank@example.com', '5556789012', 'frankpass', '2022-06-18');
+INSERT INTO App_User VALUES ('u007', 'grace', 'UK', 'Jazz lover.', TRUE, 'grace@example.com', '5557890123', 'gracepass', '2022-07-22');
+INSERT INTO App_User VALUES ('u008', 'hannah', 'India', 'Singer and songwriter.', TRUE, 'hannah@example.com', '5558901234', 'hannahpass', '2022-08-14');
+INSERT INTO App_User VALUES ('u009', 'ian', 'Germany', 'EDM producer.', FALSE, 'ian@example.com', '5559012345', 'ianpass', '2022-09-01');
+INSERT INTO App_User VALUES ('u010', 'julia', 'France', 'Loves indie music.', TRUE, 'julia@example.com', '5550123456', 'juliapass', '2022-10-10');
+
+-- ARTIST (5)
+INSERT INTO Artist VALUES ('Taylor Swift', 'USA');
+INSERT INTO Artist VALUES ('Arijit Singh', 'India');
+INSERT INTO Artist VALUES ('Ed Sheeran', 'UK');
+INSERT INTO Artist VALUES ('Hans Zimmer', 'Germany');
+INSERT INTO Artist VALUES ('Daft Punk', 'France');
+
+-- MUSIC (10)
+INSERT INTO Music VALUES ('Blank Space', '1989', 'Nice to meet you, where you been?', 'Pop');
+INSERT INTO Music VALUES ('Perfect', 'Divide', 'I found a love for me...', 'Pop');
+INSERT INTO Music VALUES ('Tum Hi Ho', 'Aashiqui 2', 'Hum tere bin ab reh nahi sakte...', 'Bollywood');
+INSERT INTO Music VALUES ('Time', 'Inception', 'Instrumental', 'Soundtrack');
+INSERT INTO Music VALUES ('Get Lucky', 'Random Access', 'We’re up all night to get lucky...', 'Electronic');
+INSERT INTO Music VALUES ('Shape of You', 'Divide', 'I’m in love with the shape of you...', 'Pop');
+INSERT INTO Music VALUES ('Bad Blood', '1989', 'Cause baby, now we got bad blood...', 'Pop');
+INSERT INTO Music VALUES ('Channa Mereya', 'Ae Dil Hai', 'Accha chalta hoon...', 'Bollywood');
+INSERT INTO Music VALUES ('Lose Yourself', '8 Mile', 'Look, if you had one shot...', 'Rap');
+INSERT INTO Music VALUES ('Harder Better', 'Discovery', 'Work it, make it, do it...', 'Electronic');
+
+-- OWNED_BY (10)
+INSERT INTO Owned_By VALUES ('Taylor Swift', 'Blank Space', '1989');
+INSERT INTO Owned_By VALUES ('Taylor Swift', 'Bad Blood', '1989');
+INSERT INTO Owned_By VALUES ('Ed Sheeran', 'Perfect', 'Divide');
+INSERT INTO Owned_By VALUES ('Ed Sheeran', 'Shape of You', 'Divide');
+INSERT INTO Owned_By VALUES ('Arijit Singh', 'Tum Hi Ho', 'Aashiqui 2');
+INSERT INTO Owned_By VALUES ('Arijit Singh', 'Channa Mereya', 'Ae Dil Hai');
+INSERT INTO Owned_By VALUES ('Hans Zimmer', 'Time', 'Inception');
+INSERT INTO Owned_By VALUES ('Daft Punk', 'Get Lucky', 'Random Access');
+INSERT INTO Owned_By VALUES ('Daft Punk', 'Harder Better', 'Discovery');
+
+-- POSTS (15)
+INSERT INTO Post VALUES ('u001', '2023-01-01', '10:00:00', 'Loving this new track!', 'New York', 'Taylor Swift', 'Blank Space', '1989');
+INSERT INTO Post VALUES ('u002', '2023-01-02', '11:30:00', 'Classic vibes.', 'London', 'Ed Sheeran', 'Perfect', 'Divide');
+INSERT INTO Post VALUES ('u003', '2023-01-03', '12:15:00', 'Bollywood feels.', 'Mumbai', 'Arijit Singh', 'Tum Hi Ho', 'Aashiqui 2');
+INSERT INTO Post VALUES ('u004', '2023-01-04', '14:00:00', 'Epic soundtrack!', 'Berlin', 'Hans Zimmer', 'Time', 'Inception');
+INSERT INTO Post VALUES ('u005', '2023-01-05', '15:45:00', 'Party anthem!', 'Paris', 'Daft Punk', 'Get Lucky', 'Random Access');
+INSERT INTO Post VALUES ('u006', '2023-01-06', '16:30:00', 'On repeat!', 'Los Angeles', 'Ed Sheeran', 'Shape of You', 'Divide');
+INSERT INTO Post VALUES ('u007', '2023-01-07', '17:00:00', 'Pop perfection.', 'Manchester', 'Taylor Swift', 'Bad Blood', '1989');
+INSERT INTO Post VALUES ('u008', '2023-01-08', '18:20:00', 'Soulful.', 'Delhi', 'Arijit Singh', 'Channa Mereya', 'Ae Dil Hai');
+INSERT INTO Post VALUES ('u009', '2023-01-09', '19:10:00', 'Movie magic.', 'Munich', 'Hans Zimmer', 'Time', 'Inception');
+INSERT INTO Post VALUES ('u010', '2023-01-10', '20:05:00', 'EDM legends!', 'Nice', 'Daft Punk', 'Harder Better', 'Discovery');
+INSERT INTO Post VALUES ('u002', '2023-01-12', '10:30:00', 'Love this!', 'Liverpool', 'Taylor Swift', 'Blank Space', '1989');
+INSERT INTO Post VALUES ('u003', '2023-01-13', '11:45:00', 'All time favorite.', 'Hyderabad', 'Arijit Singh', 'Tum Hi Ho', 'Aashiqui 2');
+INSERT INTO Post VALUES ('u004', '2023-01-14', '13:00:00', 'Chills!', 'Hamburg', 'Hans Zimmer', 'Time', 'Inception');
+INSERT INTO Post VALUES ('u005', '2023-01-15', '14:15:00', 'Dance mode on.', 'Lyon', 'Daft Punk', 'Get Lucky', 'Random Access');
+
+-- FOLLOWED_BY (10)
+INSERT INTO Followed_By VALUES ('u001', 'u002');
+INSERT INTO Followed_By VALUES ('u002', 'u003');
+INSERT INTO Followed_By VALUES ('u003', 'u004');
+INSERT INTO Followed_By VALUES ('u004', 'u005');
+INSERT INTO Followed_By VALUES ('u005', 'u006');
+INSERT INTO Followed_By VALUES ('u006', 'u007');
+INSERT INTO Followed_By VALUES ('u007', 'u008');
+INSERT INTO Followed_By VALUES ('u008', 'u009');
+INSERT INTO Followed_By VALUES ('u009', 'u010');
+INSERT INTO Followed_By VALUES ('u010', 'u001');
+
+-- LIKED_BY (10)
+INSERT INTO Liked_By VALUES ('u002', 'u001', '2023-01-01', '10:00:00');
+INSERT INTO Liked_By VALUES ('u003', 'u002', '2023-01-02', '11:30:00');
+INSERT INTO Liked_By VALUES ('u004', 'u003', '2023-01-03', '12:15:00');
+INSERT INTO Liked_By VALUES ('u005', 'u004', '2023-01-04', '14:00:00');
+INSERT INTO Liked_By VALUES ('u006', 'u005', '2023-01-05', '15:45:00');
+INSERT INTO Liked_By VALUES ('u007', 'u006', '2023-01-06', '16:30:00');
+INSERT INTO Liked_By VALUES ('u008', 'u007', '2023-01-07', '17:00:00');
+INSERT INTO Liked_By VALUES ('u009', 'u008', '2023-01-08', '18:20:00');
+INSERT INTO Liked_By VALUES ('u010', 'u009', '2023-01-09', '19:10:00');
+INSERT INTO Liked_By VALUES ('u001', 'u010', '2023-01-10', '20:05:00');
+
+-- COMMENTED_BY (10)
+INSERT INTO Commented_By VALUES ('u002', 'u001', '2023-01-01', '10:00:00', '2023-01-01', '10:05:00', 'Great post!');
+INSERT INTO Commented_By VALUES ('u003', 'u002', '2023-01-02', '11:30:00', '2023-01-02', '11:35:00', 'Love this song!');
+INSERT INTO Commented_By VALUES ('u004', 'u003', '2023-01-03', '12:15:00', '2023-01-03', '12:20:00', 'Bollywood rocks!');
+INSERT INTO Commented_By VALUES ('u005', 'u004', '2023-01-04', '14:00:00', '2023-01-04', '14:05:00', 'Epic!');
+INSERT INTO Commented_By VALUES ('u006', 'u005', '2023-01-05', '15:45:00', '2023-01-05', '15:50:00', 'Party time!');
+INSERT INTO Commented_By VALUES ('u007', 'u006', '2023-01-06', '16:30:00', '2023-01-06', '16:35:00', 'On repeat!');
+INSERT INTO Commented_By VALUES ('u008', 'u007', '2023-01-07', '17:00:00', '2023-01-07', '17:05:00', 'Pop perfection!');
+INSERT INTO Commented_By VALUES ('u009', 'u008', '2023-01-08', '18:20:00', '2023-01-08', '18:25:00', 'Soulful indeed!');
+INSERT INTO Commented_By VALUES ('u010', 'u009', '2023-01-09', '19:10:00', '2023-01-09', '19:15:00', 'EDM legends!');
+INSERT INTO Commented_By VALUES ('u001', 'u010', '2023-01-10', '20:05:00', '2023-01-10', '20:10:00', 'Such a vibe!');
+
+INSERT INTO Hashtags VALUES ('u001', '2023-01-01', '10:00:00', '#pop');
+INSERT INTO Hashtags VALUES ('u002', '2023-01-02', '11:30:00', '#classic');
+INSERT INTO Hashtags VALUES ('u003', '2023-01-03', '12:15:00', '#bollywood');
+INSERT INTO Hashtags VALUES ('u004', '2023-01-04', '14:00:00', '#soundtrack');
+INSERT INTO Hashtags VALUES ('u005', '2023-01-05', '15:45:00', '#party');
+INSERT INTO Hashtags VALUES ('u006', '2023-01-06', '16:30:00', '#onrepeat');
+INSERT INTO Hashtags VALUES ('u007', '2023-01-07', '17:00:00', '#pop');
+INSERT INTO Hashtags VALUES ('u008', '2023-01-08', '18:20:00', '#soulful');
+INSERT INTO Hashtags VALUES ('u009', '2023-01-09', '19:10:00', '#movie');
+INSERT INTO Hashtags VALUES ('u010', '2023-01-10', '20:05:00', '#edm');

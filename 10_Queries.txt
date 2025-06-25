@@ -1,0 +1,199 @@
+1. Basic User Info
+sql
+SELECT username, user_nationality, signup_date 
+FROM app_user 
+ORDER BY signup_date DESC;
+2. Artists with Most Songs
+sql
+SELECT a.artist_name, COUNT(*) AS song_count 
+FROM owned_by ob
+JOIN artist a ON ob.artist_name = a.artist_name 
+GROUP BY a.artist_name 
+ORDER BY song_count DESC 
+LIMIT 5;
+3. Posts with Hashtags
+sql
+SELECT p.description, h.hashtags 
+FROM post p
+JOIN hashtags h ON p.user_id = h.user_id 
+  AND p.upload_date = h.upload_date 
+  AND p.upload_time = h.upload_time;
+4. Most Active Users (Post Count)
+sql
+SELECT u.username, COUNT(*) AS post_count 
+FROM post p
+JOIN app_user u ON p.user_id = u.user_id 
+GROUP BY u.username 
+ORDER BY post_count DESC 
+LIMIT 5;
+5. Popular Genres
+sql
+SELECT m.genre, COUNT(*) AS post_count 
+FROM post p
+JOIN music m ON p.song_name = m.song_name AND p.album = m.album 
+GROUP BY m.genre 
+ORDER BY post_count DESC;
+6. Users with Followers Count
+sql
+SELECT u.username, COUNT(f.follower_id) AS follower_count 
+FROM app_user u
+LEFT JOIN followed_by f ON u.user_id = f.following_id 
+GROUP BY u.username 
+ORDER BY follower_count DESC;
+7. Posts with Likes and Comments
+sql
+SELECT p.description, 
+       COUNT(DISTINCT lb.liker_id) AS likes, 
+       COUNT(DISTINCT cb.commenter_id) AS comments 
+FROM post p
+LEFT JOIN liked_by lb ON p.user_id = lb.post_user_id 
+  AND p.upload_date = lb.upload_date 
+  AND p.upload_time = lb.upload_time 
+LEFT JOIN commented_by cb ON p.user_id = cb.post_user_id 
+  AND p.upload_date = cb.upload_date 
+  AND p.upload_time = cb.upload_time 
+GROUP BY p.description;
+8. Recent Posts (Last 7 Days)
+sql
+SELECT * FROM post 
+WHERE upload_date >= CURRENT_DATE - INTERVAL '7 days' 
+ORDER BY upload_date DESC;
+9. Most Used Hashtags
+sql
+SELECT hashtags, COUNT(*) AS usage_count 
+FROM hashtags 
+GROUP BY hashtags 
+ORDER BY usage_count DESC 
+LIMIT 5;
+10. Artists with International Reach
+sql
+SELECT a.artist_name, u.user_nationality, COUNT(*) AS posts 
+FROM post p
+JOIN artist a ON p.artist_name = a.artist_name 
+JOIN app_user u ON p.user_id = u.user_id 
+GROUP BY a.artist_name, u.user_nationality 
+ORDER BY posts DESC;
+11. Users Who Liked Their Own Posts
+sql
+SELECT u.username 
+FROM liked_by lb
+JOIN app_user u ON lb.liker_id = u.user_id 
+WHERE lb.liker_id = lb.post_user_id;
+12. Average Engagement per Post
+sql
+WITH engagement AS (
+  SELECT 
+    p.user_id,
+    COUNT(DISTINCT lb.liker_id) + COUNT(DISTINCT cb.commenter_id) AS total
+  FROM post p
+  LEFT JOIN liked_by lb ON p.user_id = lb.post_user_id 
+  LEFT JOIN commented_by cb ON p.user_id = cb.post_user_id 
+  GROUP BY p.user_id
+)
+SELECT AVG(total) AS avg_engagement 
+FROM engagement;
+13. Top Collaborative Artists
+sql
+SELECT ob1.artist_name, ob2.artist_name, COUNT(*) 
+FROM owned_by ob1
+JOIN owned_by ob2 ON ob1.song_name = ob2.song_name 
+  AND ob1.album = ob2.album 
+WHERE ob1.artist_name <> ob2.artist_name 
+GROUP BY ob1.artist_name, ob2.artist_name;
+14. Users with No Posts
+sql
+SELECT u.username 
+FROM app_user u
+LEFT JOIN post p ON u.user_id = p.user_id 
+WHERE p.user_id IS NULL;
+15. Songs in Multiple Albums
+sql
+SELECT song_name, COUNT(DISTINCT album) AS album_count 
+FROM music 
+GROUP BY song_name 
+HAVING COUNT(DISTINCT album) > 1;
+16. Most Prolific Commenters
+sql
+SELECT u.username, COUNT(*) AS comment_count 
+FROM commented_by cb
+JOIN app_user u ON cb.commenter_id = u.user_id 
+GROUP BY u.username 
+ORDER BY comment_count DESC 
+LIMIT 3;
+17. Posts with Specific Hashtag
+sql
+SELECT p.* 
+FROM post p
+JOIN hashtags h ON p.user_id = h.user_id 
+  AND p.upload_date = h.upload_date 
+  AND p.upload_time = h.upload_time 
+WHERE h.hashtags = '#pop';
+18. Followers of Followers
+sql
+SELECT f1.follower_id AS user_id, 
+       f2.follower_id AS follower_of_follower 
+FROM followed_by f1
+JOIN followed_by f2 ON f1.following_id = f2.following_id 
+WHERE f1.follower_id <> f2.follower_id;
+19. Artist Popularity by Country
+sql
+SELECT a.artist_name, u.user_nationality, COUNT(*) AS posts 
+FROM post p
+JOIN artist a ON p.artist_name = a.artist_name 
+JOIN app_user u ON p.user_id = u.user_id 
+GROUP BY a.artist_name, u.user_nationality 
+ORDER BY posts DESC;
+20. Longest Bios
+sql
+SELECT username, LENGTH(bio) AS bio_length 
+FROM app_user 
+ORDER BY bio_length DESC 
+LIMIT 3;
+21. Users Following Each Other
+sql
+SELECT f1.follower_id AS user1, f1.following_id AS user2 
+FROM followed_by f1
+JOIN followed_by f2 
+  ON f1.follower_id = f2.following_id 
+  AND f1.following_id = f2.follower_id;
+22. Posts with Lyrics Excerpt
+sql
+SELECT p.description, m.lyrics 
+FROM post p
+JOIN music m ON p.song_name = m.song_name AND p.album = m.album 
+WHERE m.lyrics LIKE '%love%';
+23. Hourly Post Activity
+sql
+SELECT EXTRACT(HOUR FROM upload_time) AS hour, COUNT(*) AS posts 
+FROM post 
+GROUP BY hour 
+ORDER BY posts DESC;
+24. Users with Diverse Hashtags
+sql
+SELECT u.username, COUNT(DISTINCT h.hashtags) AS unique_hashtags 
+FROM hashtags h
+JOIN app_user u ON h.user_id = u.user_id 
+GROUP BY u.username 
+ORDER BY unique_hashtags DESC 
+LIMIT 5;
+25. Albums with Multiple Artists
+sql
+SELECT album, COUNT(DISTINCT artist_name) AS artists 
+FROM owned_by 
+GROUP BY album 
+HAVING COUNT(DISTINCT artist_name) > 1;
+26. Inactive Users (No Likes/Comments)
+sql
+SELECT u.username 
+FROM app_user u
+LEFT JOIN liked_by lb ON u.user_id = lb.liker_id 
+LEFT JOIN commented_by cb ON u.user_id = cb.commenter_id 
+WHERE lb.liker_id IS NULL AND cb.commenter_id IS NULL;
+27. Viral Posts (Likes > 10)
+sql
+SELECT p.description, COUNT(lb.liker_id) AS likes 
+FROM post p
+JOIN liked_by lb ON p.user_id = lb.post_user_id 
+GROUP BY p.description 
+HAVING COUNT(lb.liker_id) > 10 
+ORDER BY likes DESC;

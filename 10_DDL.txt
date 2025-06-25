@@ -1,0 +1,101 @@
+DROP TABLE IF EXISTS Hashtags CASCADE;
+DROP TABLE IF EXISTS Commented_By CASCADE;
+DROP TABLE IF EXISTS Liked_By CASCADE;
+DROP TABLE IF EXISTS Followed_By CASCADE;
+DROP TABLE IF EXISTS Post CASCADE;
+DROP TABLE IF EXISTS Owned_By CASCADE;
+DROP TABLE IF EXISTS Music CASCADE;
+DROP TABLE IF EXISTS Artist CASCADE;
+DROP TABLE IF EXISTS App_User CASCADE;
+
+CREATE TABLE App_User (
+    User_ID           VARCHAR(20) PRIMARY KEY,
+    Username          VARCHAR(20),
+    User_Nationality  VARCHAR(20),
+    Bio               VARCHAR(250),
+    Visibility        BOOLEAN,
+    Email             VARCHAR(30),
+    Number            VARCHAR(12),
+    Password          VARCHAR(16),
+    Signup_Date       DATE
+);
+
+CREATE TABLE Artist (
+    Artist_Name         VARCHAR(30) PRIMARY KEY,
+    Artist_Nationality  VARCHAR(20)
+);
+
+CREATE TABLE Music (
+    Song_Name   VARCHAR(20),
+    Album       VARCHAR(20),
+    Lyrics      VARCHAR(10000),
+    Genre       VARCHAR(15),
+    PRIMARY KEY (Song_Name, Album)
+);
+
+CREATE TABLE Owned_By (
+    Artist_Name     VARCHAR(30),
+    Song_Name       VARCHAR(20),
+    Album           VARCHAR(20),
+    PRIMARY KEY (Artist_Name, Song_Name, Album),
+    FOREIGN KEY (Artist_Name) REFERENCES Artist(Artist_Name),
+    FOREIGN KEY (Song_Name, Album) REFERENCES Music(Song_Name, Album)
+);
+
+CREATE TABLE Post (
+    User_ID        VARCHAR(20),
+    Upload_date    DATE,
+    Upload_time    TIME,
+    Description    VARCHAR(10000),
+    Location       VARCHAR(20),
+    Artist_Name    VARCHAR(30),
+    Song_Name      VARCHAR(20),
+    Album          VARCHAR(20),
+    PRIMARY KEY (User_ID, Upload_date, Upload_time),
+    FOREIGN KEY (User_ID) REFERENCES App_User(User_ID),
+    FOREIGN KEY (Artist_Name, Song_Name, Album) 
+        REFERENCES Owned_By(Artist_Name, Song_Name, Album)
+);
+
+CREATE TABLE Followed_By (
+    Follower_ID   VARCHAR(20),
+    Following_ID  VARCHAR(20),
+    PRIMARY KEY (Follower_ID, Following_ID),
+    FOREIGN KEY (Follower_ID) REFERENCES App_User(User_ID),
+    FOREIGN KEY (Following_ID) REFERENCES App_User(User_ID)
+);
+
+CREATE TABLE Liked_By (
+    Liker_ID         VARCHAR(20),
+    Post_User_ID     VARCHAR(20),
+    Upload_date      DATE,
+    Upload_time      TIME,
+    PRIMARY KEY (Liker_ID, Post_User_ID, Upload_date, Upload_time),
+    FOREIGN KEY (Liker_ID) REFERENCES App_User(User_ID),
+    FOREIGN KEY (Post_User_ID, Upload_date, Upload_time) 
+        REFERENCES Post(User_ID, Upload_date, Upload_time)
+);
+
+CREATE TABLE Commented_By (
+    Commenter_ID     VARCHAR(20),
+    Post_User_ID     VARCHAR(20),
+    Upload_date      DATE,
+    Upload_time      TIME,
+    Comment_Date     DATE,
+    Comment_Time     TIME,
+    Comment          VARCHAR(250),
+    PRIMARY KEY (Commenter_ID, Post_User_ID, Upload_date, Upload_time, Comment_Date, Comment_Time),
+    FOREIGN KEY (Commenter_ID) REFERENCES App_User(User_ID),
+    FOREIGN KEY (Post_User_ID, Upload_date, Upload_time) 
+        REFERENCES Post(User_ID, Upload_date, Upload_time)
+);
+
+CREATE TABLE Hashtags (
+    User_ID        VARCHAR(20),
+    Upload_date    DATE,
+    Upload_time    TIME,
+    Hashtags       VARCHAR(30),
+    PRIMARY KEY (User_ID, Upload_date, Upload_time, Hashtags),
+    FOREIGN KEY (User_ID, Upload_date, Upload_time) 
+        REFERENCES Post(User_ID, Upload_date, Upload_time)
+);
