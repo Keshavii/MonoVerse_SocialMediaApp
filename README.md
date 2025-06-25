@@ -40,7 +40,7 @@ Enables exploration of trends, discovery of like-minded users, and analysis of m
 ### 🧱 Database Schema Overview
 
 **App_User**  
-Stores all user profiles along with visibility preferences and bio details.
+Stores all the user profiles along with visibility preferences and bio details.
 
 **Artist, Music, Owned_By**  
 Define the music catalog, including song metadata and artist relationships.
