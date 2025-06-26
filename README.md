@@ -70,5 +70,6 @@ MONOVERSE is a rebellion against algorithm-driven validation. This DBMS was inte
 - PostgreSQL-compatible SQL syntax
 - Modular relational design
 - Normalized schema (up to 3NF)
-- Data integrity via FOREIGN KEY constraints
+- Data integrity via FOREIGN KEY constraints.
+  
 
